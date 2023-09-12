@@ -1,11 +1,15 @@
-import { Col, message, Row } from 'antd'
+import { Col, Row } from 'antd'
 import { Formik } from 'formik'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { useNavigate, useParams } from 'react-router'
 import Button from '../../../components/Button'
 import { Form } from '../../../components/form'
 import Field from '../../../components/form/Field'
+import apiClient from '../../../utils/apiClient'
 
-function OrderCatalogForm() {
+function PharmacyDrugForm() {
+  const navigate = useNavigate()
+  const { id } = useParams()
   const formik = useRef(null)
 
   const initialValues = {
@@ -15,13 +19,18 @@ function OrderCatalogForm() {
     itemCode: '',
     description: '',
     synonym: '',
-    stockItem: '',
-    consignmentItem: '',
-    batchApplicable: '',
-    expiryItem: '',
-    replaceOnExpiry: '',
-    returnAllowed: '',
-    refundAllowed: '',
+    stockItem: false,
+    consignmentItem: false,
+    batchApplicable: false,
+    expiryItem: false,
+    replaceOnExpiry: false,
+    returnAllowed: false,
+    refundAllowed: false,
+    trialDrug: false,
+    addative: false,
+    compound: false,
+    dispense: false,
+    counselling: false,
     packOfUom: null,
     packSize: null,
     packUnitUom: null,
@@ -33,25 +42,52 @@ function OrderCatalogForm() {
     reorderLevel: null,
     reorderQuantity: null,
     status: null,
-    effectiveFrom: '',
-    effectiveTo: '',
+    effectiveFrom: null,
+    effectiveTo: null,
     reason: ''
   }
 
-  const handleSubmit = () => {
-    message.success('Intro details created successfully')
+  const getData = () => {
+    if (id) {
+      apiClient.get(`pharmacyDrugs/get/${id}`).then(({ data }) => {
+        if (data && data.result) {
+          formik.current.setValues(data.result)
+        }
+      })
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  const handleSubmit = (data) => {
+    if (id) {
+      apiClient.put(`pharmacyDrugs/update/${id}`, { ...data }).then(({ data }) => {
+        if (data && data.result) {
+          navigate('/app/pharmacy-drugs')
+        }
+      })
+    } else {
+      apiClient.post('pharmacyDrugs/add', data).then(({ status }) => {
+        if (status === 200) {
+          navigate('/app/pharmacy-drugs')
+        }
+      })
+      // message.success('Intro details created successfully')
+    }
   }
 
   return (
     <div className="p-4 px-16">
       <div className="admin">
-        <div className="title">Order Catalog Details</div>
+        <div className="title">Pharmacy Drug Details</div>
         <Formik
           innerRef={formik}
           initialValues={initialValues}
           // validationSchema={eGenjaIntroSchema}
           onSubmit={handleSubmit}>
-          <Form labelCol={{ xs: 0 }}>
+          <Form layout="horizontal">
             <div className="bg-white p-3 shadow-lg rounded-md">
               <label className="field-label">Item</label>
               <Row gutter={[10, 10]} className="my-1">
@@ -102,26 +138,41 @@ function OrderCatalogForm() {
               </Row>
               <label className="field-label">Attributes</label>
               <Row gutter={[10, 10]} className="my-1">
-                <Col xs={24} sm={24} md={12} lg={2} xl={2}>
+                <Col xs={24} sm={24} md={12} lg={3} xl={3}>
                   <Field as="checkbox" label="Stock Item" name="stockItem" />
                 </Col>
-                <Col xs={24} sm={24} md={12} lg={2} xl={2}>
+                <Col xs={24} sm={24} md={12} lg={4} xl={4}>
                   <Field as="checkbox" label="Consignment Item" name="consignmentItem" />
                 </Col>
-                <Col xs={24} sm={24} md={12} lg={2} xl={2}>
+                <Col xs={24} sm={24} md={12} lg={3} xl={3}>
                   <Field as="checkbox" label="Batch Applicable" name="batchApplicable" />
                 </Col>
-                <Col xs={24} sm={24} md={12} lg={2} xl={2}>
+                <Col xs={24} sm={24} md={12} lg={3} xl={3}>
                   <Field as="checkbox" label="Expiry Item" name="expiryItem" />
                 </Col>
-                <Col xs={24} sm={24} md={12} lg={2} xl={2}>
+                <Col xs={24} sm={24} md={12} lg={3} xl={3}>
                   <Field as="checkbox" label="Replace On Expiry" name="replaceOnExpiry" />
                 </Col>
-                <Col xs={24} sm={24} md={12} lg={2} xl={2}>
+                <Col xs={24} sm={24} md={12} lg={3} xl={3}>
                   <Field as="checkbox" label="Return Allowed" name="returnAllowed" />
                 </Col>
-                <Col xs={24} sm={24} md={12} lg={2} xl={2}>
+                <Col xs={24} sm={24} md={12} lg={3} xl={3}>
                   <Field as="checkbox" label="Refund Allowed" name="refundAllowed" />
+                </Col>
+                <Col xs={24} sm={24} md={12} lg={3} xl={3}>
+                  <Field as="checkbox" label="Trial Drug" name="trialDrug" />
+                </Col>
+                <Col xs={24} sm={24} md={12} lg={3} xl={3}>
+                  <Field as="checkbox" label="Used as Addative" name="addative" />
+                </Col>
+                <Col xs={24} sm={24} md={12} lg={5} xl={5}>
+                  <Field as="checkbox" label="Used for Compound Preparation" name="compound" />
+                </Col>
+                <Col xs={24} sm={24} md={12} lg={4} xl={4}>
+                  <Field as="checkbox" label="Dispense via Rx Only" name="dispense" />
+                </Col>
+                <Col xs={24} sm={24} md={12} lg={3} xl={3}>
+                  <Field as="checkbox" label="Counselling Required" name="counselling" />
                 </Col>
               </Row>
               <label className="field-label">Unit Of Measurement</label>
@@ -266,4 +317,4 @@ function OrderCatalogForm() {
   )
 }
 
-export default OrderCatalogForm
+export default PharmacyDrugForm

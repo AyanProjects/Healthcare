@@ -16,7 +16,7 @@ function Input({ onChange, label, error, value, innerRef, required, ...props }: 
       <GenericDatePicker
         ref={innerRef}
         onChange={(v) => onChange(props.name, v)}
-        value={moment(value)}
+        value={value ? moment(value) : null}
         {...props}
       />
     </Form.Item>

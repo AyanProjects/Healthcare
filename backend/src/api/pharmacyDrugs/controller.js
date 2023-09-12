@@ -1,7 +1,7 @@
-import pharmacyItems from "./model";
+import pharmacyDrugs from "./model";
 
 export const getAll = (req, res) => {
-  pharmacyItems
+  pharmacyDrugs
     .find({ ...req.query })
     .then((results) => {
       res.send({ success: true, message: "Success", result: results });
@@ -13,7 +13,7 @@ export const getAll = (req, res) => {
 
 export const create = async (req, res, next) => {
   try {
-    const result = await pharmacyItems.create({ ...req.query, ...req.body });
+    const result = await pharmacyDrugs.create({ ...req.query, ...req.body });
     res.send({ success: true, message: "Success", result });
   } catch (err) {
     next(err);
@@ -21,7 +21,7 @@ export const create = async (req, res, next) => {
 };
 
 export const deleteById = (req, res) => {
-  pharmacyItems
+  pharmacyDrugs
     .findByIdAndDelete(req.params.id)
     .then((results) => {
       res.send({ success: true, message: "Success", result: results });
@@ -33,7 +33,7 @@ export const deleteById = (req, res) => {
 
 export const getById = async (req, res, next) => {
   try {
-    const result = await pharmacyItems.findOne({ ...req.query, _id: req.params.id });
+    const result = await pharmacyDrugs.findOne({ ...req.query, _id: req.params.id });
     res.send({ success: true, message: "Success", result });
   } catch (error) {
     next(error);
@@ -43,7 +43,7 @@ export const getById = async (req, res, next) => {
 export const updateById = async (req, res, next) => {
   try {
     const query = { _id: req.params.id, ...req.query };
-    const result = await pharmacyItems.findOneAndUpdate(query, req.body);
+    const result = await pharmacyDrugs.findOneAndUpdate(query, req.body);
     res.send({ success: true, message: "Updated", result });
   } catch (err) {
     next(err);

@@ -1,8 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
-const patientSchema = new Schema(
+const accompanySchema = new Schema(
   {
     idType: {
+      type: String,
+      maxLength: 50
+    },
+    toPatient: {
       type: String,
       maxLength: 50
     },
@@ -18,7 +22,6 @@ const patientSchema = new Schema(
       type: String,
       maxLength: 50
     },
-
     prefix: {
       type: String,
       maxLength: 50
@@ -120,6 +123,7 @@ const patientSchema = new Schema(
       }
     ]
   },
+
   {
     timestamps: true,
     toJSON: { virtuals: true, id: true },
@@ -127,4 +131,4 @@ const patientSchema = new Schema(
   }
 );
 
-export default mongoose.model("patients", patientSchema);
+export default mongoose.model("accompanies", accompanySchema);

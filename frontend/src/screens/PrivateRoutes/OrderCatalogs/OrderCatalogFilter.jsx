@@ -5,13 +5,13 @@ import Button from '../../../components/Button'
 import { Field, Form } from '../../../components/form'
 import { GET_DATA, removeEmptyKeys, SET_DATA } from '../../../utils/util'
 
-function PharmacyItemFilter({ values, setValues, ...props }) {
+function OrderCatalogFilter({ values, setValues, ...props }) {
   const onSubmitForm = async () => {
     props.validateForm().then((err) => {
       if (_.isEmpty(err)) {
         const params = removeEmptyKeys(values)
         props.onSubmit(params)
-        SET_DATA('pharmacyItems.filterData', values)
+        SET_DATA('orderCatalogs.filterData', values)
       }
     })
   }
@@ -30,39 +30,31 @@ function PharmacyItemFilter({ values, setValues, ...props }) {
       <div className="form-fields">
         <Field
           as="select"
-          label="ID Category"
-          name="itemCategory"
-          placeholder="Item Category"
+          name="orderCategory"
+          placeholder="Order Category"
+          label="Order Category"
           options={[
-            { label: 'Drug', value: 'drug' },
-            { label: 'Non-drug', value: 'non-drug' }
+            { label: 'Lab', value: 'lab' },
+            { label: 'Radiology', value: 'radiology' }
           ]}
         />
       </div>
       <div className="form-fields">
         <Field
           as="select"
-          name="itemType"
-          placeholder="Item Type"
-          label="Item Type"
+          name="orderType"
+          placeholder="Order Type"
+          label="Order Type"
           options={[
-            { label: 'General', value: 'general' },
-            { label: 'Syringe', value: 'syringe' },
-            { label: 'Needle', value: 'needle' }
+            { label: 'Bio-chemistry', value: 'bio-chemistry' },
+            { label: 'Microbiology', value: 'microbiology' },
+            { label: 'Cytology', value: 'cytology' },
+            { label: 'Hematology', value: 'hematology' }
           ]}
         />
       </div>
       <div className="form-fields">
-        <Field
-          as="select"
-          name="itemClass"
-          label="Item Class"
-          placeholder="Item Class"
-          options={[
-            { label: 'SurgicalItem', value: 'surgicalItem' },
-            { label: 'Non-SurgicalItem', value: 'nonSurgicalItem' }
-          ]}
-        />
+        <Field name="orderCode" placeholder="Catalog Code" label="Catalog Code" />
       </div>
       <div className="form-fields">
         <Button type="submit" variant="primary" className="search" onClick={onSubmitForm}>
@@ -78,13 +70,13 @@ function PharmacyItemFilter({ values, setValues, ...props }) {
 
 export default withFormik({
   mapPropsToValues: () => {
-    const filterObj = GET_DATA('pharmacyItems.filterData')
+    const filterObj = GET_DATA('orderCatalogs.filterData')
 
     return {
-      itemCategory: filterObj?.itemCategory || '',
-      itemType: filterObj?.itemType || '',
-      itemClass: filterObj?.itemClass || ''
+      orderCategory: filterObj?.itemCategory || '',
+      orderType: filterObj?.itemType || '',
+      orderCode: filterObj?.itemClass || ''
     }
   },
   handleSubmit: () => null
-})(PharmacyItemFilter)
+})(OrderCatalogFilter)

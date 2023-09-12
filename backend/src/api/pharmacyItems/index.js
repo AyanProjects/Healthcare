@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { create, deleteById, getAll, getById } from "./controller";
+import { create, deleteById, getAll, getById, updateById } from "./controller";
 
 const router = new Router();
 
@@ -12,5 +12,7 @@ router.get("/get", getAll);
 router.delete("/delete/:id", deleteById);
 
 router.get("/get/:id", getById);
+
+router.put("/update/:id", updateById);
 
 export default router;

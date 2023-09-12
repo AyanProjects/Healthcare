@@ -2,7 +2,7 @@ import { Checkbox as AntdCheckbox, Form } from 'antd'
 import { memo } from 'react'
 import type { TCheckbox } from './types'
 
-function Input({ onChange, label, error, innerRef, required, ...props }: TCheckbox) {
+function Input({ onChange, label, error, innerRef, value, required, ...props }: TCheckbox) {
   return (
     <Form.Item
       label={label}
@@ -11,7 +11,12 @@ function Input({ onChange, label, error, innerRef, required, ...props }: TCheckb
       valuePropName="custom"
       help={error && error.replace(props.name, label || '')}
       required={required}>
-      <AntdCheckbox ref={innerRef} onChange={(e) => onChange?.(props.name, e.target.checked)} {...props} />
+      <AntdCheckbox
+        ref={innerRef}
+        onChange={(e) => onChange?.(props.name, e.target.checked)}
+        checked={value}
+        {...props}
+      />
     </Form.Item>
   )
 }

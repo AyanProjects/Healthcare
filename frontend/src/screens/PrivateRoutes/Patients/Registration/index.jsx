@@ -1,12 +1,14 @@
-import { message } from 'antd'
 import { Formik } from 'formik'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { useParams } from 'react-router-dom'
 import Button from '../../../../components/Button'
 import { Form } from '../../../../components/form'
+import apiClient from '../../../../utils/apiClient'
 import { patientRegistrationSchema } from '../../../../utils/validationSchema'
 import Content from './Content'
 
 export default function PatientRegistration({ next }) {
+  const { id } = useParams()
   const formik = useRef(null)
 
   const initialValues = {
@@ -48,9 +50,34 @@ export default function PatientRegistration({ next }) {
     ]
   }
 
-  const handleSubmit = () => {
-    message.success('Intro details created successfully')
-    next()
+  const getData = () => {
+    if (id) {
+      apiClient.get(`patients/get/${id}`).then(({ data }) => {
+        if (data && data.result) {
+          formik.current.setValues(data.result)
+        }
+      })
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  const handleSubmit = (data) => {
+    if (id) {
+      apiClient.put(`patients/update/${id}`, { ...data }).then(({ data }) => {
+        if (data && data.result) {
+          next()
+        }
+      })
+    } else {
+      apiClient.post('patients/add', data).then(({ data }) => {
+        if (data && data.result) {
+          next()
+        }
+      })
+    }
   }
 
   return (

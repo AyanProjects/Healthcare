@@ -7,6 +7,7 @@ export default function PrivateRoutes() {
     <Routes>
       <Route path="/" element={<Patients />} />
       <Route path="add" element={<PatientForm />} />
+      <Route path="edit/:id" element={<PatientForm />} />
     </Routes>
   )
 }

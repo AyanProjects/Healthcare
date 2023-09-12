@@ -5,7 +5,7 @@ import Button from '../../../components/Button'
 import { Field, Form } from '../../../components/form'
 import { GET_DATA, removeEmptyKeys, SET_DATA } from '../../../utils/util'
 
-function PharmacyItemFilter({ values, setValues, ...props }) {
+function PatientFilter({ values, setValues, ...props }) {
   const onSubmitForm = async () => {
     props.validateForm().then((err) => {
       if (_.isEmpty(err)) {
@@ -30,39 +30,21 @@ function PharmacyItemFilter({ values, setValues, ...props }) {
       <div className="form-fields">
         <Field
           as="select"
-          label="ID Category"
-          name="itemCategory"
-          placeholder="Item Category"
+          name="idType"
+          placeholder="ID Type"
+          label="ID Type"
           options={[
-            { label: 'Drug', value: 'drug' },
-            { label: 'Non-drug', value: 'non-drug' }
+            { label: 'Driving License', value: 'drivingLicense' },
+            { label: 'PAN Card', value: 'panCard' },
+            { label: 'Aadhar', value: 'aadhar' }
           ]}
         />
       </div>
       <div className="form-fields">
-        <Field
-          as="select"
-          name="itemType"
-          placeholder="Item Type"
-          label="Item Type"
-          options={[
-            { label: 'General', value: 'general' },
-            { label: 'Syringe', value: 'syringe' },
-            { label: 'Needle', value: 'needle' }
-          ]}
-        />
+        <Field name="patientName" label="Patient Name" />
       </div>
       <div className="form-fields">
-        <Field
-          as="select"
-          name="itemClass"
-          label="Item Class"
-          placeholder="Item Class"
-          options={[
-            { label: 'SurgicalItem', value: 'surgicalItem' },
-            { label: 'Non-SurgicalItem', value: 'nonSurgicalItem' }
-          ]}
-        />
+        <Field name="age" label="Age" />
       </div>
       <div className="form-fields">
         <Button type="submit" variant="primary" className="search" onClick={onSubmitForm}>
@@ -78,13 +60,13 @@ function PharmacyItemFilter({ values, setValues, ...props }) {
 
 export default withFormik({
   mapPropsToValues: () => {
-    const filterObj = GET_DATA('pharmacyItems.filterData')
+    const filterObj = GET_DATA('patients.filterData')
 
     return {
-      itemCategory: filterObj?.itemCategory || '',
-      itemType: filterObj?.itemType || '',
-      itemClass: filterObj?.itemClass || ''
+      idType: filterObj?.patientID || '',
+      patientName: filterObj?.patientName || '',
+      age: filterObj?.age || ''
     }
   },
   handleSubmit: () => null
-})(PharmacyItemFilter)
+})(PatientFilter)

@@ -1,11 +1,13 @@
-import { message } from 'antd'
 import { Formik } from 'formik'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { useParams } from 'react-router-dom'
 import Button from '../../../../components/Button'
 import { Form } from '../../../../components/form'
+import apiClient from '../../../../utils/apiClient'
 import AccompanyDetailsContent from './Content'
 
 export default function AccompanyDetails({ next, previous }) {
+  const { id } = useParams()
   const formik = useRef(null)
 
   const initialValues = {
@@ -48,18 +50,39 @@ export default function AccompanyDetails({ next, previous }) {
     ]
   }
 
-  const handleSubmit = () => {
-    message.success('Accompany details created successfully')
-    next()
+  const getData = () => {
+    if (id) {
+      apiClient.get(`accompanies/get/${id}`).then(({ data }) => {
+        if (data && data.result) {
+          formik.current.setValues(data.result)
+        }
+      })
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  const handleSubmit = (data) => {
+    if (id) {
+      apiClient.put(`accompanies/update/${id}`, { ...data }).then(({ data }) => {
+        if (data && data.result) {
+          next()
+        }
+      })
+    } else {
+      apiClient.post('accompanies/add', data).then(({ data }) => {
+        if (data && data.result) {
+          next()
+        }
+      })
+    }
   }
 
   return (
     <div className="Accompany Details">
-      <Formik
-        innerRef={formik}
-        initialValues={initialValues}
-        // validationSchema={eGenjaIntroSchema}
-        onSubmit={handleSubmit}>
+      <Formik innerRef={formik} initialValues={initialValues} onSubmit={handleSubmit}>
         <Form>
           <AccompanyDetailsContent />
           <div className="flex justify-between my-3">
