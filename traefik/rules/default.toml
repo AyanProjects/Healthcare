@@ -1,0 +1,44 @@
+[http]
+  [http.routers]
+    [http.routers.frontend_ssl]
+      entryPoints = ["https"]
+      middlewares = ["gzip-compress", "autodetect"]
+      rule = "Host(`localhost`)"
+      service = "frontend"
+    [http.routers.frontend]
+      entryPoints = ["http"]
+      middlewares = ["generic-rate-limit", "gzip-compress", "autodetect"]
+      rule = "Host(`localhost`)"
+      service = "frontend"
+    [http.routers.backend_ssl]
+      entryPoints = ["https"]
+      middlewares = ["gzip-compress", "autodetect"]
+      rule = "Host(`localhost`) && PathPrefix(`/api/`)"
+      service = "backend"
+      [http.routers.backend_ssl.tls]
+    [http.routers.backend]
+      entryPoints = ["http"]
+      middlewares = ["generic-rate-limit", "gzip-compress", "autodetect"]
+      rule = "Host(`localhost`) && PathPrefix(`/api/`)"
+      service = "backend"
+
+    [http.middlewares.generic-rate-limit.rateLimit]
+      average = 100
+      burst = 50
+
+    [http.middlewares.gzip-compress.compress]
+
+    [http.middlewares.autodetect.contentType]
+      autoDetect=true
+
+    [http.services]
+      [http.services.frontend]
+        [http.services.frontend.loadBalancer]
+        passHostHeader = true
+        [[http.services.frontend.loadBalancer.servers]]
+        url = "http://frontend:3000"
+      [http.services.backend]
+        [http.services.backend.loadBalancer]
+        passHostHeader = true
+        [[http.services.backend.loadBalancer.servers]]
+        url = "http://backend:3000"

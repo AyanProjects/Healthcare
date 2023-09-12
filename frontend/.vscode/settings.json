@@ -1,0 +1,13 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "*.js": "javascriptreact"
+  },
+  "stylelint.validate": ["css", "scss"],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

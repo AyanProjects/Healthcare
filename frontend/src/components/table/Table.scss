@@ -1,0 +1,225 @@
+.custom-background {
+  padding: 0 16px;
+
+  // // background: #fff;
+  // border-radius: 10px;
+}
+
+.custom-table table {
+  // border-collapse: separate;
+  // border-spacing: 0 7px;
+  width: 100%;
+}
+
+.custom-table thead tr {
+  background: #f1f1f1;
+
+  // border-bottom: 1px solid #dee3ea;
+  // padding-bottom: 11px !important;
+  // padding-top: 9px !important;
+  // vertical-align: bottom;
+  // background: #fff;
+  // background: -moz-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%);
+  // background:
+  //   -webkit-gradient(
+  //     left top,
+  //     left bottom,
+  //     color-stop(0%, #fff),
+  //     color-stop(47%, #f6f6f6),
+  //     color-stop(100%, #ededed)
+  //   );
+  // background: -webkit-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%);
+  // background: -o-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%);
+  // background: -ms-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%);
+  // background: linear-gradient(to bottom, #fff 0%, #f6f6f6 47%, #ededed 100%);
+  padding-bottom: 14px !important;
+  padding-top: 14px !important;
+  vertical-align: bottom;
+}
+
+.custom-table thead tr th {
+  white-space: nowrap !important;
+}
+
+// .custom-table tbody tr {
+//   border-radius: 5px;
+//   background-color: #FFF;
+//   box-shadow: 0 2px 20px 0 #efefef;
+//   margin-top: 20px;
+//   font-size: 15px;
+// }
+
+.custom-table tbody tr:nth-child(2n + 1) {
+  background: #f9f9f9;
+}
+
+.custom-table .thead tr {
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+// .custom-table tbody > tr:hover {
+//   background: #ebf3f9;
+// }
+
+.custom-table thead > tr > td {
+  background: transparent;
+  background: #fff;
+  background: -moz-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%);
+  background: -webkit-gradient(
+    left top,
+    left bottom,
+    color-stop(0%, #fff),
+    color-stop(47%, #f6f6f6),
+    color-stop(100%, #ededed)
+  );
+  background: -webkit-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%);
+  background: -o-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%);
+  background: -ms-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%);
+  background: linear-gradient(to bottom, #fff 0%, #f6f6f6 47%, #ededed 100%);
+  border-bottom: 0;
+  color: #000;
+  font-weight: bold;
+  overflow-wrap: break-word;
+  padding: 10px 8px;
+  position: relative;
+  text-align: left;
+  text-transform: uppercase;
+  transition: background 0.3s ease;
+}
+
+.table td {
+  color: #526273;
+}
+
+.table tr td a:hover {
+  color: #428bca;
+  text-decoration: underline;
+}
+
+.custom-table tbody > tr > td {
+  border-top: 1px solid var(--light-gray);
+  vertical-align: top;
+}
+
+.custom-table tbody > tr > td {
+  background: transparent;
+  border-bottom: 0;
+  color: #526273;
+  font-size: 12px;
+  overflow-wrap: break-word;
+  padding: 8px !important;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.custom-card-details .action {
+  float: right;
+  padding: 2px;
+}
+
+.issued .custom-card-details .custom-card-status h3 {
+  color: #026ec1;
+}
+
+.cancelled .custom-card-details .custom-card-status h3 {
+  color: #ec476e;
+}
+
+.paid .custom-card-details .custom-card-status h3 {
+  color: #6bbb69;
+}
+
+.custom-card-details .custom-card-status h3 i {
+  margin-right: 8px;
+}
+
+.custom-card-details .custom-card-title {
+  margin-bottom: 10px;
+}
+
+.custom-card-otherdetails span,
+.custom-card-title span {
+  color: #9e9e9e;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.custom-card-title p {
+  font-size: 14px;
+}
+
+.custom-card-otherdetails h2 {
+  font-size: 16px;
+}
+
+.custom-card-otherdetails .ant-col-md-12:nth-child(2n + 1) .details {
+  margin-bottom: 9px;
+  padding-right: 10px;
+}
+
+.custom-card-status .action {
+  background: #cecece;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  height: 30px;
+  line-height: 1.3;
+  text-align: center;
+  width: 30px;
+}
+
+// custom changes starts here
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td,
+.ant-table tfoot > tr > th,
+.ant-table tfoot > tr > td {
+  overflow-wrap: break-word;
+  padding: 6px !important;
+  position: relative;
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  background: #f5fcff;
+}
+
+.ant-table-thead > tr > th {
+  background: #f9f9f9 !important;
+
+  // background: -moz-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%) !important;
+  // background: -webkit-gradient(left top,
+  // left bottom,
+  // color-stop(0%, #fff),
+  // color-stop(47%, #f6f6f6),
+  // color-stop(100%, #ededed)) !important;
+  // background: -webkit-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%) !important;
+  // background: -o-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%) !important;
+  // background: -ms-linear-gradient(top, #fff 0%, #f6f6f6 47%, #ededed 100%) !important;
+  // background: linear-gradient(to bottom, #fff 0%, #f6f6f6 47%, #ededed 100%) !important;
+  font-size: 12px;
+  font-weight: bold !important;
+  padding-bottom: 11px !important;
+  padding-top: 9px !important;
+  vertical-align: bottom;
+}
+
+// custom changes ends here
+
+@media (max-width: 600px) {
+  .custom-table thead tr th {
+    min-width: 100px;
+  }
+}
+
+.alignItem-center {
+  margin-bottom: 3%;
+  margin-left: 20%;
+  margin-top: 3%;
+}
+
+.ant-table-measure-row {
+  display: none !important;
+}

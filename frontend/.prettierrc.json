@@ -1,0 +1,13 @@
+{
+  "jsxBracketSameLine": true,
+  "printWidth": 110,
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "useTabs": false,
+  "tabWidth": 2,
+  "plugins": [
+    "prettier-plugin-organize-imports"
+  ],
+  "pluginSearchDirs": false
+}

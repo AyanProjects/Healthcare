@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  frontend:
+    container_name: healthcare_frontend
+    build: ./frontend
+    volumes:
+      - ./frontend:/home/node/frontend
+    command: yarn start
+    env_file:
+      - .env
+
+  backend:
+    container_name: healthcare_backend
+    build: ./backend
+    volumes:
+      - ./backend:/home/node/backend
+    command: yarn start
+    depends_on:
+      - db
+      - s3
+    env_file:
+      - .env
+
+  db:
+    container_name: healthcare_db
+    image: mongo:7.0
+    ports:
+      - 27017:27017
+    volumes:
+      - ./db_data:/data/db
+
+  s3:
+    container_name: healthcare_s3
+    image: minio/minio:RELEASE.2023-09-07T02-05-02Z
+    volumes:
+      - ./s3_data:/data/minio
+    command: server ./data/minio
+    env_file:
+      - .env
+
+  router:
+    container_name: healthcare_router
+    image: traefik:2.10.4
+    links:
+      - frontend
+      - backend
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./traefik/rules:/rules
+      - ./traefik/accesslog.txt:/accesslog.txt
+      - ./traefik/acme.json:/acme.json
+    env_file:
+      - .env

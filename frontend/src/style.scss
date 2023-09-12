@@ -1,0 +1,176 @@
+.admin .title {
+  color: #f49f10;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.filter-section {
+  background: var(--white);
+
+  // background: #f7f7f7;
+  min-height: 100vh;
+  padding: 29px 18px;
+  width: 100%;
+}
+
+.filter-section form {
+  margin-top: 15px;
+}
+
+.filter-section form .form-fields label {
+  color: #5b5b5b;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 2px;
+  text-transform: capitalize;
+}
+
+.filter-section form .form-fields:last-child,
+.filter-section .form-fields:last-child {
+  border-top: 1px solid #d9d9d9;
+  margin-top: 14px;
+}
+
+.filter-section .form-fields:last-child button {
+  margin-top: 14px;
+  width: 100%;
+}
+
+.filter-section form .form-fields .search {
+  margin-top: 14px;
+  width: 100%;
+}
+
+.mobile-filter {
+  display: none;
+  left: 0;
+  position: fixed;
+  top: 40%;
+  z-index: 999;
+
+  @media (max-width: 900px) {
+    display: block;
+  }
+}
+
+.mobile-filter .btn-glow {
+  padding: 7px 9px;
+}
+
+.mobile-sider-menu {
+  height: 50px;
+
+  @media (max-width: 900px) {
+    display: none;
+    position: absolute;
+    z-index: 2;
+  }
+}
+
+.table-layout {
+  .table-title {
+    font-weight: 600;
+    color: #012970;
+    font-size: 20px;
+    margin-bottom: 14px;
+    margin-top: 18px;
+  }
+
+  .add-button {
+    display: none;
+    margin-bottom: 15px;
+
+    @media (max-width: 900px) {
+      display: block;
+    }
+  }
+
+  .custom-background {
+    padding: 0;
+  }
+}
+
+.site-navigation-steps {
+  background-color: #212364;
+  border-radius: 5px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding-right: 10px;
+  padding-top: 8px !important;
+
+  .ant-steps-item {
+    .ant-steps-item-container {
+      padding-bottom: 10px !important;
+    }
+    &::after {
+      border-color: #fff !important;
+      border-width: 2px !important;
+    }
+    .ant-steps-item-title {
+      font-size: 14px;
+      color: #fff !important;
+    }
+    &.ant-steps-item-active .ant-steps-item-title {
+      color: #f49f10 !important;
+    }
+  }
+}
+
+.field-label {
+  color: #374464;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.panel-layout {
+  margin-bottom: 50px;
+
+  h2 {
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .panel-title {
+    background-color: #374464;
+    color: white;
+    font-size: 25px;
+    margin-bottom: 14px;
+    padding: 30px;
+    text-transform: uppercase;
+    width: 60%;
+  }
+}
+
+.list-field {
+  border-top: 1px solid #ededed;
+  display: flex;
+  margin-bottom: 3px;
+  padding-bottom: 8px;
+  padding-top: 20px;
+  position: relative;
+
+  > .ant-row {
+    flex: 1;
+  }
+
+  .remove-column {
+    .btn-glow.delete-field {
+      color: red;
+      padding: 0 5px;
+    }
+  }
+}
+
+.list-field:first-child {
+  border-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  position: relative;
+}
+
+.background {
+  background-image: url('./assets/images/background.jpg');
+  background-size: cover;
+}
